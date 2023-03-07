@@ -1,7 +1,7 @@
 import functions
 import time
 
-print(time.strftime("%d - %b - %y"))
+print("it is:", time.strftime("%d - %b - %Y %H:%M:%S"))
 while True:
     user_action = input("Type add, show,complete, edit or exit:")
     user_action = user_action.strip()
@@ -12,8 +12,7 @@ while True:
         todo = user_action[4:] + '\n'
         todos.append(todo)
 
-        with open('todos.txt', 'w') as file:
-            file.writelines(todos)
+        functions.write_todos(todos)
 
     elif user_action.startswith("show"):
         for index, item in enumerate(todos):
@@ -31,8 +30,8 @@ while True:
             new_todo = input("Enter new todo: ")
             todos[number] = new_todo + '\n'
 
-            with open('todos.txt', 'w') as file:
-                file.writelines(todos)
+            functions.write_todos(todos)
+
         except ValueError:
             print("Your command is not valid.")
             continue
@@ -47,6 +46,9 @@ while True:
 
             message = f"Todo {todo_to_remove} was removed from the list."
             print(message)
+
+            functions.write_todos(todos)
+
         except IndexError:
             print("There is no item that number.")
             continue
