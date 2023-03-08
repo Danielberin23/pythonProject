@@ -27,6 +27,17 @@ while True:
             new_todo = values['todo'] + "\n"
             todos.append(new_todo)
             functions.write_todos(todos)
+        case "Edit":
+            todo_to_edit = values["todos"]
+            new_todo = values["todo"]
+
+            todos = functions.get_todos()
+            index = todos.index(todo_to_edit)
+            todos[index] = new_todo + "\n"
+            functions.write_todos(todos)
+            main_window["todos"].update(value=todos)
+        case "todos":
+            main_window["todo"].update(value=values["todos"][0])
         case sg.WIN_CLOSED:
             break;
 
